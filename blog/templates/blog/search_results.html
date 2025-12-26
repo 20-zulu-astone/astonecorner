@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="f-container">
+
+    
+        <h1>Search Results</h1>
+        <p>Results for "{{ query }}"</p>
+    
+
+    <section class="f-body">
+        <div class="f-main">
+
+            {% if results %}
+                {% for post in results %}
+                    <article class="post">
+                        <h3>{{ post.title | safe }}</h3>
+                        <p>{{ post.excerpt }}</p>
+                        <a href="{% url 'post_detail' post.id %}">Read More</a>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+
+        </div>
+    </section>
+
+</div>
+{% endblock %}

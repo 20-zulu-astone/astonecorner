@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+ 
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'about.css'%}">
+<div class="f-container">
+
+     <!-- HERO SECTION -->
+<section class="f-hero">
+    <div class="hero-circle">
+        <h1>astonecorner</h1>
+        <p>Not just a blog, but our own blog.</p>
+    </div>
+</section>
+
+
+    <!-- FIRST SECTION: Mission & What to Expect -->
+    <section class="about-section about-mission-expect">
+        <div class="about-columns">
+
+            <!-- Mission -->
+            <div class="about-column">
+                <div class="about-text">
+                <h2>Our Mission</h2>
+                </div>
+                <p>
+                    astonecorner is dedicated to sharing insightful content on technology, programming, 
+                    and personal growth. The goal is to empower readers with knowledge and practical skills.
+                    It is a blog for everyone.
+                    And it all you need.
+                </p>
+            </div>
+
+            <!-- What to Expect -->
+            <div class="about-column">
+                <div class="about-text">
+                <h2>What You Can Expect</h2>
+                </div>
+                <ul>
+                    <li >Latest trends in tech and programming.</li>
+                    <li >Career Tips.</li>
+                    <li >Hight Quality Tutorials and Guides.</li>
+                    <li >Books Perspective and knowledge.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+    <div class="meet-author">
+        <h2><strong>Meet the Author</strong></h2>
+    </div>
+    <!-- SECOND SECTION: About the Author -->
+    <section class="about-section about-author">
+        <div class="author-container">
+            <img src="{% static 'founder.png' %}" alt="Astone Zulu" class="author-photo">
+            <div class="author-name-color">
+    <h3 class="author-name">
+        Astone Zulu
+        <a href="https://www.linkedin.com/in/zuluastone" target="_blank" rel="noopener">
+            <img src="{% static 'linkedin-image.png' %}" 
+                 alt="LinkedIn" 
+                 class="linkedin-icon">
+        </a>
+    </h3>
+</div>
+            <p class="author-quote">"You don't have to be great to start, but you have to start to be great." - Zig Ziglar</p>
+            
+        </div>
+    </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,187 @@
+/* NAV WRAPPER */
+.nav-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000000;
+  border-bottom: 2px solid #0a0a0a;
+  border-radius: 0; /* removed rounded corners */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  padding: 0; /* remove horizontal padding so it spans full width */
+}
+.logo-img {
+    height: 100px;       /* adjust to fit navbar height */
+    width: auto;        /* maintain aspect ratio */
+}
+@media (max-width: 768px) {
+    .logo-img {
+        height: 50px;  /* smaller for mobile */
+    }
+}
+
+/* Optional: align vertically */
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+
+/* MAIN NAV CONTAINER */
+.nav-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000000;
+  border-radius: 0; /* removed rounded corners */
+  box-shadow: none; /* optional: remove shadow for flat look */
+  flex-wrap: wrap;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* LINKS */
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #03fa3d;
+}
+
+/* BRAND */
+.site-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #04f804;
+  text-decoration: none;
+  flex-shrink: 1; /* allows brand to shrink if needed */
+  min-width: 0;   /* fixes overflow issue */
+}
+
+.brand-highlight {
+  color: #ffffff;
+}
+
+/* LEFT SIDE */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  flex-shrink: 1; /* allows shrinking on smaller screens */
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+
+/* RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* SEARCH */
+.nav-search {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  width: auto;
+}
+
+.nav-search input {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  min-width: 80px; /* prevent too small input */
+  flex: 1;         /* input fills available space */
+}
+
+.search-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #03fa3d;
+  color: #000;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  flex-shrink: 0; /* button stays its size */
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .nav-left,
+  .nav-right {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav-search {
+    width: 100%;
+  }
+
+  .nav-search input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-name {
+    font-size: 1.3rem;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* LOGIN BUTTON */
+.nav-button.login-btn {
+  padding: 8px 16px;
+  background: #fbde02; 
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+  flex-shrink: 0; /* stays same size even if flex wraps */
+}
+
+.nav-button.login-btn:hover {
+  background: #03fa3d;
+}
+
+/* Adjust nav-right gap if needed */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* slightly smaller gap to fit login button neatly */
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* Responsive tweaks for login button */
+@media (max-width: 768px) {
+  .nav-button.login-btn {
+    width: 100%; /* full width on smaller screens */
+    text-align: center;
+  }
+}

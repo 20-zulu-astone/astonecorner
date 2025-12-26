@@ -1,0 +1,137 @@
+.login-container {
+  max-width: 400px;
+  width: 100%;
+  margin: 0;                      /* 🔥 important */
+  padding: 30px;
+  background: #000000;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  color: #ffffff;
+  text-align: center;
+}
+
+.login-page {
+  min-height: 100vh;              /* full screen height */
+  display: flex;
+  align-items: center;            /* vertical center */
+  justify-content: center;        /* horizontal center */
+  padding: 20px;                  /* safe spacing on small screens */
+            /* match your site */
+}
+
+@media (max-height: 600px) {
+  .login-page {
+    align-items: flex-start;
+  }
+}
+
+
+.login-link-page{
+  color:#03fa3d;
+  text-decoration: none;
+}
+.login-container h2 {
+  color: #03fa3d;
+  margin-bottom: 20px;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+/* Submit button */
+.login-submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #03fa3d;
+  color: #000;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-submit-btn:hover {
+  background: #02c32d;
+}
+
+.login-container a {
+  color: #03fa3d;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
+
+/* Style Django form errors */
+.login-container .errorlist {
+    color: #f03d3d;       
+    font-size: 0.9rem;    
+    margin-top: 4px;      
+    margin-bottom: 8px;   
+    list-style: none;     
+    padding-left: 0;
+    text-align: left;     
+}
+
+/* Messages styling */
+.login-container .messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.login-container .message {
+    background: #222;
+    color: #f03d3d;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 350px;
+    margin: 50px 20px;
+    padding: 25px;
+  }
+
+  .login-container input,
+  .login-submit-btn {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    max-width: 300px;
+    margin: 40px 15px;
+    padding: 20px;
+  }
+
+  .login-container input,
+  .login-submit-btn {
+    font-size: 0.9rem;
+    padding: 7px 8px;
+  }
+
+  .login-container h2 {
+    font-size: 1.3rem;
+  }
+}

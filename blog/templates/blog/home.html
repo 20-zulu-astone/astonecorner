@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+<div class="home-container">
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero-section">
+
+        <!-- LEFT: TWO SLICED POSTS -->
+        <div class="hero-left">
+            {% for post in recent_posts|slice:"1:3" %}
+            <article class="hero-card small">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                {% endif %}
+
+                <div class="overlay">
+                    <h3>{{ post.title |safe }}</h3>
+                    <a href="{% url 'post_detail' post.id %}" class="btn">Read</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- RIGHT: MAIN POST -->
+        <div class="hero-right">
+            {% if recent_posts %}
+            {% with post=recent_posts.0 %}
+            <article class="hero-card large">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                {% endif %}
+
+                <div class="overlay">
+                    <h1>{{ post.title | safe }}</h1>
+                    <a href="{% url 'post_detail' post.id %}" class="btn">Read More</a>
+                </div>
+            </article>
+            {% endwith %}
+            {% endif %}
+        </div>
+
+    </section>
+
+    <!-- ================= FEATURED POSTS ================= -->
+    <section class="featured-section">
+
+        <div class="featured-wrapper">
+            <h2 class="featured-title">POPULAR POSTS</h2>
+
+            <div class="featured-grid">
+                {% for post in featured_posts|slice:":8" %}
+                <article class="featured-card">
+                    {% if post.featured_image %}
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+
+                    <div class="overlay">
+                        <h3>{{ post.title |safe }}</h3>
+                        <a href="{% url 'post_detail' post.id %}" class="btn">Read More</a>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+
+</div>
+{% endblock %}

@@ -1,0 +1,175 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="f-container">
+
+    <!-- POST TITLE AND META -->
+    <h1>{{ post.title|safe }}</h1>
+    <p>By {{ post.author.username }} | Published on {{ post.created_at|date:"F j, Y" }}</p>
+
+    <!-- POST MEDIA -->
+    {% if post.featured_image or post.video %}
+    <section class="f-featured">
+        {% if post.featured_image %}
+            <div class="post-image">
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+            </div>
+        {% endif %}
+        {% if post.video %}
+            <div class="post-media">
+                <video controls>
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    <!-- MAIN CONTENT -->
+    <section class="f-body">
+        <div class="f-main">
+            <article class="post-details">
+                <div class="post-content">
+                    {{ post.content|safe }}
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- LIKE BUTTON -->
+    <div class="post-likes">
+    {% if user.is_authenticated %}
+        <button class="like-btn" data-post="{{ post.id }}">
+            ❤️ <span class="like-count">{{ post.likes.count }}</span>
+        </button>
+    {% else %}
+    <div class="login-link-page">
+        <p><a href="{% url 'login' %}">Login</a> to like this post.</p>
+    </div>
+    {% endif %}
+</div>
+
+    <!-- COMMENTS SECTION -->
+    <section class="post-comments">
+        <h3>Comments ({{ post.comment_set.count }})</h3>
+
+        <!-- Existing comments -->
+       <ul id="comments-list">
+{% for comment in comments %}
+    <li class="comment">
+        <strong>{{ comment.user.username }}</strong>
+        <small>{{ comment.created_at|date:"F j, Y H:i" }}</small>
+        <p>{{ comment.content }}</p>
+    </li>
+{% empty %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endfor %}
+</ul>
+
+        <!-- Comment form -->
+        {% if user.is_authenticated %}
+        <h4>Leave a Comment</h4>
+        <form id="comment-form" method="POST" action="{% url 'post_detail' post.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-comment">Comment</button>
+        </form>
+        {% else %}
+        <div>
+            <p><a href="{% url 'login' %}" class="login-link-page">Login</a> to comment.</p>
+        </div>
+        {% endif %}
+    </section>
+
+</div>
+
+<script>
+    
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ===== CSRF TOKEN =====
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                cookie = cookie.trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+
+    // ===== LIKE BUTTONS =====
+    document.querySelectorAll('.like-btn').forEach(button => {
+
+        button.addEventListener('click', () => {
+            const postId = button.dataset.post;
+            const likeCount = button.querySelector('.like-count');
+
+            fetch(`/like/${postId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+            })
+            .then(res => res.json())
+            .then(data => {
+                likeCount.innerText = data.total_likes;
+            })
+            .catch(err => console.error(err));
+        });
+
+    });
+
+
+
+
+    // ===== COMMENT FORM =====
+    const commentForm = document.getElementById('comment-form');
+    if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(commentForm);
+            const url = commentForm.getAttribute('action');
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                },
+                body: formData,
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const commentsList = document.getElementById('comments-list');
+
+                    const newComment = document.createElement('li');
+                    newComment.classList.add('comment');
+                    newComment.innerHTML = `
+                        <strong>${data.username}</strong>
+                        <small>Just now</small>
+                        <p>${data.content}</p>
+                    `;
+
+                    commentsList.appendChild(newComment);
+                    commentForm.reset();
+                }
+            })
+            .catch(err => console.error(err));
+        });
+    }
+
+});
+</script>
+{% endblock %}
+

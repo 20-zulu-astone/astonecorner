@@ -1,0 +1,152 @@
+/* ===== GLOBAL ===== */
+.home-container {
+    width: 100%;
+}
+
+section {
+    padding: 4rem 1rem;
+}
+
+/* Make all images inside cards fit containers properly */
+.hero-card img,
+.featured-card img,
+.career-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill container while keeping aspect ratio */
+    display: block;
+    border-radius: 12px; /* match card corners */
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    background: #111111;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+}
+
+.hero-left {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.hero-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    height: 100%;
+}
+
+.hero-card.large {
+    min-height: 420px;
+    height: auto; /* make it flexible */
+}
+
+.hero-card.small {
+    min-height: 200px;
+    height: auto;
+}
+
+/* ===== OVERLAY TEXT ===== */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.7),
+        rgba(0,0,0,0.1)
+    );
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.2rem;
+}
+
+.overlay h1,
+.overlay h3 {
+    margin-bottom: 0.5rem;
+}
+
+/* ===== FEATURED SECTION ===== */
+.featured-section {
+    background: #111111;
+  
+    padding: 2rem 1rem; /* add padding so cards don't touch edges */
+}
+
+.featured-wrapper {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.featured-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.featured-card {
+    position: relative;
+    aspect-ratio: 4 / 3; /* ensures card height scales with width */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.featured-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    align-self: flex-start;
+    padding: 0.5rem 1.2rem;
+    background: none;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-left {
+        grid-template-rows: auto;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-left {
+        grid-template-columns: 1fr;
+    }
+
+    .overlay h1 {
+        font-size: 1.4rem;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr; /* cards stack on small screens */
+    }
+
+    .featured-card {
+        aspect-ratio: auto; /* height adjusts automatically */
+    }
+}
