@@ -3,7 +3,7 @@ __pycache__/
 db.sqlite3
 venv/
 staticfiles/
-.killer
-
+killer/
+media/
 
 
