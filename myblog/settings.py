@@ -127,16 +127,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'blog' / 'static',]
+# Ensure the leading slash is present
+STATIC_URL = '/static/'
+
+# Correct: absolute path where collectstatic will gather files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Correct: tell Django where to find additional assets before collection
+STATICFILES_DIRS = [
+    BASE_DIR / 'blog' / 'static',
+]
+
+# Use the modern STORAGES setting for Django 4.2+ and 5.x
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-'''STORAGES = {
-    "staticfiles":{
-        "BACKEND":"whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}'''
