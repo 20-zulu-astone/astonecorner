@@ -145,11 +145,13 @@ STATICFILES_DIRS = [
 
 # Use the modern STORAGES setting for Django 4.2+ and 5.x
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
